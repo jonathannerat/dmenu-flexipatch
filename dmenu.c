@@ -1635,7 +1635,11 @@ setup(void)
 
 		#if CENTER_PATCH
 		if (center) {
-			mw = MIN(MAX(max_textw() + promptw, min_width), info[i].width);
+			mw =
+			#if XYW_PATCH
+				dmw > 0 ? dmw :
+			#endif
+				MIN(MAX(max_textw() + promptw, min_width), info[i].width);
 			x = info[i].x_org + ((info[i].width  - mw) / 2);
 			y = info[i].y_org + ((info[i].height - mh) / 2);
 		} else {
@@ -1667,7 +1671,11 @@ setup(void)
 			    parentwin);
 		#if CENTER_PATCH
 		if (center) {
-			mw = MIN(MAX(max_textw() + promptw, min_width), wa.width);
+			mw =
+			#if XYW_PATCH
+				dmw > 0 ? dmw :
+			#endif
+				MIN(MAX(max_textw() + promptw, min_width), wa.width);
 			x = (wa.width  - mw) / 2;
 			y = (wa.height - mh) / 2;
 		} else {
